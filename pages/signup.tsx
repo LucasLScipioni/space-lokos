@@ -29,7 +29,7 @@ const SignUp: NextPage = () => {
 
   useEffect(() => {
     api.get('/countries').then(res => {
-      setCountries(res.data.map(e => e.name))
+      setCountries(res.data.map((e: any) => e.name))
     }
     )
   }, [])
