@@ -1,0 +1,41 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+input,select{
+  border: #0005 1px solid;
+  width: 300px;
+  border-radius: 20px;
+  padding: 10px;
+  outline: none;
+  margin: 5px;
+}
+
+button{
+  cursor: pointer;
+  border: none;
+  width: 300px;
+  border-radius: 20px;
+  padding: 10px;
+  outline: none;
+  margin: 5px;
+  background-color: #530b77;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+button:hover{
+  padding: 13px;
+  opacity: 0.8;
+}
