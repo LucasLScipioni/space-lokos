@@ -6,14 +6,13 @@
   flex-direction: row;
   
 }
-.leaderboardRow{
+
+.gameHeader{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-top: 10px;
-}
-.leaderboardUsername{
-margin-right: 10px;
+  align-items: center;
 }
 .main {
   min-height: 100vh;

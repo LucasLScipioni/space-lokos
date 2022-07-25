@@ -1,8 +1,7 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
-import { ChangeEvent, useCallback, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useCallback, useState } from 'react'
 import { api } from '../Services/api'
 import styles from '../styles/Home.module.css'
 
@@ -10,7 +9,7 @@ const Home: NextPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<string[]>([])
-
+  const route = useRouter();
   const onSubmitHandler = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (username.length > 0 && password.length > 0) {
@@ -18,7 +17,9 @@ const Home: NextPage = () => {
       api.get('/auth', {params:{ username, password} })
         .then(res => {
           if (res.status === 200) {
-            window.location.href = '/game'
+            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('username', res.data.username)
+            route.replace('/game')
           } else {
             setErrors(['Invalid username or password'])
           }
@@ -32,7 +33,7 @@ const Home: NextPage = () => {
       setErrors(['Please enter a username and password'])
     }
   }
-  , [username, password])
+  , [username, password, route])
   return (
     <div className={styles.container}>
 
@@ -42,7 +43,7 @@ const Home: NextPage = () => {
         </h1>
         <div className={styles.inputContainer}>
           <input value={username} onChange={(e)=>setUsername(e.target.value)} placeholder='Username'/>
-          <input value={password} onChange={(e)=>setPassword(e.target.value)}  placeholder='Password'/>
+          <input value={password} type='password' onChange={(e)=>setPassword(e.target.value)}  placeholder='Password'/>
         </div>
         <button onClick={onSubmitHandler}>
           Login

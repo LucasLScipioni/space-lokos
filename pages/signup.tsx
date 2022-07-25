@@ -1,8 +1,6 @@
-import axios from 'axios'
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { api } from '../Services/api'
 import styles from '../styles/Home.module.css'
@@ -24,16 +22,16 @@ const SignUp: NextPage = () => {
     confirmPassword:'',
     country:''
   })
+  const route = useRouter()
   const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> ,key:string)=>{
       setAccountInfo(s =>({...s,[key]:e.target.value}));
   },[]); 
 
   useEffect(()=>{
-    fetch('http://localhost:3000/api/countries')
-    .then(res => res.json())
-    .then(data => setCountries(data.map((country:{name:string}) => country.name)))
-  
-
+    api.get('/countries').then(res=>{
+      setCountries(res.data)
+    }
+    )
   },[])
 
   const validateAccountInfo = useCallback((): boolean=>{
@@ -62,14 +60,16 @@ const SignUp: NextPage = () => {
   const onSubmitHandler = useCallback((e:React.MouseEvent<HTMLButtonElement>)=>{
     if(validateAccountInfo()){
       api.post('/auth',accountInfo).then(res => {
-          window.location.href = '/game'
+          route.replace('/game')
+          localStorage.setItem('token', res.data.token)
+          localStorage.setItem('username', res.data.username)
       }
       ).catch(err => {
         setErrors([err.response?.data?.message] || ['An error occurred'])
       })
 
   }}
-  ,[accountInfo, validateAccountInfo]);
+  ,[accountInfo, route, validateAccountInfo]);
 
   return (
     <div className={styles.container}>

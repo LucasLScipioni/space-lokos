@@ -1,0 +1,75 @@
+.container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  background-color: #0007;
+  align-items: center;
+  justify-content: center;
+}
+.row{
+  display: flex;
+  flex-direction: row;
+  
+}
+.modal{
+  width: 50vw;
+  min-height: 50px;
+  background-color: #fff;
+  border-radius: 15px;
+  -webkit-box-shadow: 10px 10px 36px 3px rgba(0, 0, 0, 0.255);
+  -moz-box-shadow: 10px 10px 36px 3px rgba(0, 0, 0, 0.255);
+  box-shadow: 10px 10px 36px 3px rgba(0, 0, 0, 0.255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+.gameNameTitle{
+  color: #530b77;
+}
+.containerLeaderboard {
+  padding: 1rem 0;
+  flex: 1;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.leaderboardRow{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.leaderboardUsername{
+margin-right: 10px;
+}
+.leaderboard{
+  width: 100%;
+  max-width: 500px;
+  height: 70vh;
+  border: solid 2px #530b77;
+  border-radius: 20px;
+  padding: 0 20px;
+  transition: padding 0.2s ease-in-out;
+ 
+}
+@media (max-width: 768px) {
+  .leaderboard{
+  padding: 0 5px;
+  }
+}
+.close{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+  color: #530b77;
+
+}

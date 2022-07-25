@@ -1,13 +1,15 @@
 import type { NextPage } from 'next'
 
-import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { ChangeEvent, useCallback, useState } from 'react'
+import { api } from '../Services/api'
 import styles from '../styles/Home.module.css'
 
 const Guest: NextPage = () => {
   const [guestName, setGuestName] = useState<string>('')
   const [errors, setErrors] = useState<string[]>([])
+  const route = useRouter();
   const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setGuestName(e.target.value)
   }
@@ -17,13 +19,19 @@ const Guest: NextPage = () => {
     e.preventDefault()
     if (guestName.length > 0) {
       setErrors([])
-      window.location.href = `/game`
+      api.get('/auth/guest', {params:{
+        username:guestName
+      }}).then(res => {
+        route.replace('/game')
+        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('username', res.data.username)
+      })
     }
     else {
       setErrors(['Please enter a guest name'])
     }
   }
-  , [guestName])
+  , [guestName, route])
   return (
     <div className={styles.container}>
       

@@ -1,0 +1,28 @@
+.container {
+  padding: 0 2rem;
+}
+
+.gameHeader{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.title {
+  margin-top: 12px;
+  line-height: 1.15;
+  font-size: 4rem;
+}
+.gameNameTitle{
+  color: #530b77;
+}
+.button{
+  width: 150px;
+}
+.buttonContainer{
+  width:150;
+  justify-content:center;
+  display:flex;
+}
