@@ -2,9 +2,9 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import Button from '../components/button'
 import { api } from '../Services/api'
 import styles from '../styles/Home.module.css'
-
 interface accountInfo {
   username: string;
   password: string;
@@ -16,6 +16,7 @@ interface accountInfo {
 const SignUp: NextPage = () => {
   const [errors, setErrors] = useState<string[]>([])
   const [countries, setCountries] = useState<string[]>([])
+  const [loading, setLoading] = useState(false)
   const [accountInfo, setAccountInfo] = useState<accountInfo>({
     username: '',
     password: '',
@@ -60,12 +61,15 @@ const SignUp: NextPage = () => {
     , [accountInfo])
   const onSubmitHandler = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     if (validateAccountInfo()) {
+      setLoading(true)
       api.post('/auth', accountInfo).then(res => {
+        setLoading(false)
         route.replace('/game')
         localStorage.setItem('token', res.data.token)
         localStorage.setItem('username', res.data.username)
       }
       ).catch(err => {
+        setLoading(false)
         setErrors([err.response?.data?.message] || ['An error occurred'])
       })
 
@@ -101,9 +105,12 @@ const SignUp: NextPage = () => {
           }
           )}
         </div>}
-        <button onClick={onSubmitHandler}>
-          Create
-        </button>
+        <Button
+          onClick={onSubmitHandler}
+          text='Create'
+          loading={loading}
+        />
+
 
         <span>Already have an account?
           <Link href='/'>

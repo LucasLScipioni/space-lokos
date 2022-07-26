@@ -3,12 +3,14 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ChangeEvent, useCallback, useState } from 'react'
+import Button from '../components/button'
 import { api } from '../Services/api'
 import styles from '../styles/Home.module.css'
 
 const Guest: NextPage = () => {
   const [guestName, setGuestName] = useState<string>('')
   const [errors, setErrors] = useState<string[]>([])
+  const [loading, setLoading] = useState(false)
   const route = useRouter();
   const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setGuestName(e.target.value)
@@ -19,17 +21,22 @@ const Guest: NextPage = () => {
     e.preventDefault()
     if (guestName.length > 0) {
       setErrors([])
+      setLoading(true)
       api.get('/auth/guest', {
         params: {
           username: guestName
         }
       }).then(res => {
+        setLoading(false)
         route.replace('/game')
         localStorage.setItem('token', res.data.token)
         localStorage.setItem('username', res.data.username)
+      }).catch(err => {
+        setLoading(false)
       })
     }
     else {
+
       setErrors(['Please enter a guest name'])
     }
   }
@@ -47,9 +54,11 @@ const Guest: NextPage = () => {
         <div className={styles.inputContainer}>
           <input placeholder='Guest Name' value={guestName} onChange={onChangeHandler} />
         </div>
-        <button onClick={onSubmitHandler}>
-          Login
-        </button>
+        <Button
+          onClick={onSubmitHandler}
+          text='Login'
+          loading={loading}
+        />
         {errors.length > 0 && <div className={styles.errorContainer}>
           {errors.sort((a, b) => (a.length - b.length)).map((error, index) => {
             return <div className={styles.errorText} key={index}>{error}</div>

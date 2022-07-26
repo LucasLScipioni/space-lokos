@@ -2,11 +2,13 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCallback, useState } from 'react'
+import Button from '../components/button'
 import { api } from '../Services/api'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const [username, setUsername] = useState('')
+  const [loading, setLoading] = useState(false)
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<string[]>([])
   const route = useRouter();
@@ -14,8 +16,10 @@ const Home: NextPage = () => {
     e.preventDefault()
     if (username.length > 0 && password.length > 0) {
       setErrors([])
+      setLoading(true)
       api.get('/auth', { params: { username, password } })
         .then(res => {
+          setLoading(false)
           if (res.status === 200) {
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('username', res.data.username)
@@ -26,6 +30,7 @@ const Home: NextPage = () => {
         }
         )
         .catch(err => {
+          setLoading(false)
           setErrors(['Invalid username or password'])
         }
         )
@@ -47,9 +52,12 @@ const Home: NextPage = () => {
           <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder='Username' />
           <input value={password} type='password' onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
         </div>
-        <button onClick={onSubmitHandler}>
-          Login
-        </button>
+        <Button
+          onClick={onSubmitHandler}
+          text='Login'
+          loading={loading}
+        />
+
         {errors.length > 0 &&
           <div className={styles.errorContainer}>
             {errors.sort((a, b) => (a.length - b.length)).map((error, index) => {
