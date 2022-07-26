@@ -1,5 +1,7 @@
 html,
 body {
+  color: #bcbfc7;
+  background: #0f1923;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -14,7 +16,9 @@ a {
 * {
   box-sizing: border-box;
 }
-input,select{
+
+input,
+select {
   border: #0005 1px solid;
   width: 300px;
   border-radius: 20px;
@@ -23,7 +27,11 @@ input,select{
   margin: 5px;
 }
 
-button{
+#game-div canvas {
+  height: 100%;
+}
+
+button {
   cursor: pointer;
   border: none;
   width: 300px;
@@ -31,11 +39,12 @@ button{
   padding: 10px;
   outline: none;
   margin: 5px;
-  background-color: #530b77;
+  background-color: #f12c4c;
   color: #fff;
   transition: all 0.3s ease;
 }
-button:hover{
+
+button:hover {
   padding: 13px;
   opacity: 0.8;
 }

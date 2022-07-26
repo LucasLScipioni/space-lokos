@@ -13,15 +13,17 @@ const Guest: NextPage = () => {
   const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setGuestName(e.target.value)
   }
-  , [])
+    , [])
   const onSubmitHandler = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    
+
     e.preventDefault()
     if (guestName.length > 0) {
       setErrors([])
-      api.get('/auth/guest', {params:{
-        username:guestName
-      }}).then(res => {
+      api.get('/auth/guest', {
+        params: {
+          username: guestName
+        }
+      }).then(res => {
         route.replace('/game')
         localStorage.setItem('token', res.data.token)
         localStorage.setItem('username', res.data.username)
@@ -31,42 +33,44 @@ const Guest: NextPage = () => {
       setErrors(['Please enter a guest name'])
     }
   }
-  , [guestName, route])
+    , [guestName, route])
   return (
     <div className={styles.container}>
-      
+
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <span className={styles.gameNameTitle}>{"SPACE LOKO'S"}</span>
-        </h1>
+        <div className={styles.header}>
+          <h1 className={styles.title}>
+            Welcome to <span className={styles.gameNameTitle}>{"SPACE LOKO'S"}</span>
+          </h1>
+        </div>
         <div className={styles.inputContainer}>
-          <input placeholder='Guest Name' value={guestName} onChange={onChangeHandler}/>
+          <input placeholder='Guest Name' value={guestName} onChange={onChangeHandler} />
         </div>
         <button onClick={onSubmitHandler}>
           Login
         </button>
         {errors.length > 0 && <div className={styles.errorContainer}>
-          {errors.sort((a,b)=> (a.length - b.length)).map((error,index)=>{
+          {errors.sort((a, b) => (a.length - b.length)).map((error, index) => {
             return <div className={styles.errorText} key={index}>{error}</div>
           }
           )}
         </div>}
         <span>Already have an account?
-        <Link href='/'>
-          <span className={styles.hyperLink}>
-            Login now!
-          </span>
-        </Link>
+          <Link href='/'>
+            <span className={styles.hyperLink}>
+              Login now!
+            </span>
+          </Link>
         </span>
         <span>
-        <Link href='/signup'>
-          <span className={styles.hyperLink}>
-            Sign up now!
-          </span>
-        </Link>
+          <Link href='/signup'>
+            <span className={styles.hyperLink}>
+              Sign up now!
+            </span>
+          </Link>
         </span>
-     
+
       </main>
 
     </div>

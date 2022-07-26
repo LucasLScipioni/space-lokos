@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     e.preventDefault()
     if (username.length > 0 && password.length > 0) {
       setErrors([])
-      api.get('/auth', {params:{ username, password} })
+      api.get('/auth', { params: { username, password } })
         .then(res => {
           if (res.status === 200) {
             localStorage.setItem('token', res.data.token)
@@ -33,39 +33,41 @@ const Home: NextPage = () => {
       setErrors(['Please enter a username and password'])
     }
   }
-  , [username, password, route])
+    , [username, password, route])
   return (
     <div className={styles.container}>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <span className={styles.gameNameTitle}>{"SPACE LOKO'S"}</span>
-        </h1>
+        <div className={styles.header}>
+          <h1 className={styles.title}>
+            Welcome to <span className={styles.gameNameTitle}>{"SPACE LOKO'S"}</span>
+          </h1>
+        </div>
         <div className={styles.inputContainer}>
-          <input value={username} onChange={(e)=>setUsername(e.target.value)} placeholder='Username'/>
-          <input value={password} type='password' onChange={(e)=>setPassword(e.target.value)}  placeholder='Password'/>
+          <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder='Username' />
+          <input value={password} type='password' onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
         </div>
         <button onClick={onSubmitHandler}>
           Login
         </button>
-        {errors.length > 0 && 
-        <div className={styles.errorContainer}>
-          {errors.sort((a,b)=> (a.length - b.length)).map((error,index)=>{
-            return <div className={styles.errorText} key={index}>{error}</div>
-          }
-          )}
-         </div>}
+        {errors.length > 0 &&
+          <div className={styles.errorContainer}>
+            {errors.sort((a, b) => (a.length - b.length)).map((error, index) => {
+              return <div className={styles.errorText} key={index}>{error}</div>
+            }
+            )}
+          </div>}
         <Link href='/guest'>
-        <span className={styles.hyperLink}>Login as guest</span>
+          <span className={styles.hyperLink}>Login as guest</span>
         </Link>
         <span>{"Don't"} have an account?
-        <Link href='/signup'>
-          <span className={styles.hyperLink}>
-            Sign up now!
-          </span>
-        </Link>
+          <Link href='/signup'>
+            <span className={styles.hyperLink}>
+              Sign up now!
+            </span>
+          </Link>
         </span>
-     
+
       </main>
 
     </div>

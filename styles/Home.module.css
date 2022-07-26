@@ -1,27 +1,29 @@
-.container {
-  padding: 0 2rem;
-}
-.row{
+.row {
   display: flex;
   flex-direction: row;
-  
+
 }
 
-.gameHeader{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 10px;
-  align-items: center;
-}
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+.header {
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 140px;
+  width: 100%;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #323b45;
+}
+
 .containerLeaderboard {
   min-height: 100vh;
   padding: 1rem 0;
@@ -40,20 +42,23 @@
   justify-content: center;
   align-items: center;
 }
-.inputContainer{
+
+.inputContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .hyperLink {
-  color: #0070f3;
+  color: #fff;
   cursor: pointer;
   margin-left: 7px;
   margin-top: 5px;
 
 }
-.leaderboard{
+
+.leaderboard {
   width: 70vw;
   max-width: 500px;
   height: 70vh;
@@ -61,14 +66,16 @@
   border-radius: 20px;
   padding: 0 80px;
   transition: padding 0.2s ease-in-out;
- 
+
 }
+
 @media (max-width: 768px) {
-  .leaderboard{
-  padding: 0 40px;
+  .leaderboard {
+    padding: 0 40px;
   }
 }
-.errorContainer{
+
+.errorContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -76,13 +83,16 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.errorText{
+
+.errorText {
   color: red;
 
 }
-.gameNameTitle{
-  color: #530b77;
+
+.gameNameTitle {
+  color: #f12c4c;
 }
+
 .footer a {
   display: flex;
   justify-content: center;
@@ -102,13 +112,14 @@
 }
 
 .title {
-  margin-top: 12px;
+  margin: 0;
   line-height: 1.15;
   font-size: 4rem;
 }
 
 .title,
 .description {
+  color: #fff;
   text-align: center;
 }
 

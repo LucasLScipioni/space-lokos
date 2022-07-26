@@ -29,6 +29,7 @@ const SignUp: NextPage = () => {
 
   useEffect(() => {
     api.get('/countries').then(res => {
+      console.log(res.data)
       setCountries(res.data.map((e: any) => e.name))
     }
     )
@@ -76,9 +77,11 @@ const SignUp: NextPage = () => {
     <div className={styles.container}>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <span className={styles.gameNameTitle}>SPACE {"LOKO'S"}</span>
-        </h1>
+        <div className={styles.header}>
+          <h1 className={styles.title}>
+            Welcome to <span className={styles.gameNameTitle}>SPACE {"LOKO'S"}</span>
+          </h1>
+        </div>
         <div className={styles.inputContainer}>
           <input placeholder='Username' onChange={(e) => { onChangeHandler(e, 'username') }} value={accountInfo.username} />
           <select onChange={(e) => { onChangeHandler(e, 'country') }} value={accountInfo.country}>

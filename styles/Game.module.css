@@ -1,28 +1,36 @@
 .container {
-  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-.gameHeader{
+.gameHeader {
+  padding: 0 2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 10px;
   align-items: center;
+  height: 140px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #323b45;
 }
 
 .title {
-  margin-top: 12px;
+  margin: 0;
   line-height: 1.15;
   font-size: 4rem;
 }
-.gameNameTitle{
-  color: #530b77;
+
+.gameNameTitle {
+  color: #fff;
 }
-.button{
+
+.button {
   width: 150px;
 }
-.buttonContainer{
-  width:150;
-  justify-content:center;
-  display:flex;
+
+.buttonContainer {
+  width: 150;
+  justify-content: center;
+  display: flex;
 }
