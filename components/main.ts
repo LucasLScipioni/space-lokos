@@ -13,7 +13,7 @@ interface IEnemy extends Phaser.GameObjects.Sprite {
   life?: number;
   speed?: number;
   getHit?: (damage: number) => void;
-  fly?: (speed: number) => void;
+  fly?: () => void;
 }
 
 interface MainScene extends Phaser.Scene {
